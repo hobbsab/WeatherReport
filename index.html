@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Weather</title>
+    <link rel="stylesheet" href="reset.css"/>
+    <link rel="stylesheet" href="style.css"/>
+  </head>
+  <body>
+      <header>
+        <h1>Weather</h1>
+      </header>
+
+      <form id="location-form">
+        <label id="searchbar">Search for a city:</label>
+        <input id="maininput">
+        <button class="searchbtn" type="submit">Search</button>
+      </form>
+
+    <section id="citybox">
+        <h2 id="city">CITY</h2>
+        <p id="temp">Temp:</p>
+          <p id="temptext">T</p>
+        <p id="wind">Wind:</p>
+          <p id="windtext">W</p>
+        <p id="humidity">Humidity:</p>
+          <p id="humiditytext">H</p>
+    </section>
+
+    <section id="weekdays">
+        <h2 id="city">5-Day Forecast:</h2>
+        <div class="week" id="day1">
+            <p class="weektext">day</p>
+        </div>
+        <div class="week" id="day2">
+          <p class="weektext">day</p>
+        </div>
+        <div class="week" id="day3">
+          <p class="weektext">day</p>
+        </div>
+        <div class="week" id="day4">
+          <p class="weektext">day</p>
+        </div>
+        <div class="week" id="day5">
+          <p class="weektext">day</p>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
