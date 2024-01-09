@@ -21,9 +21,9 @@
 // });
 
 const searchForm = document.querySelector('#location-form');
-searchForm.addEventListener('submit', function(event) {
-  event.preventDefault();
-}
+searchForm.addEventListener('searchbtn', function(getAPI) {
+  getAPI.preventDefault();
+});
 
 const searchInput = document.querySelector('#maininput');
 
@@ -31,6 +31,7 @@ const apiKey = '37e6228807b1cbe9c035512c6ab1399d';
 const city = searchInput.value;
 
 // Make API request
+function getAPI {
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
   .then(response => response.json())
   .then(data => {
@@ -47,3 +48,4 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}
   .catch(error => {
     console.error('Error:', error);
   });
+};
