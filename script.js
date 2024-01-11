@@ -21,9 +21,8 @@
 // });
 const searchInput = document.querySelector('#maininput');
 const apiKey = '37e6228807b1cbe9c035512c6ab1399d';
-let city = searchInput.value;
-
 const searchForm = document.querySelector('#location-form');
+
 searchForm.addEventListener("submit", function (event) {
   event.preventDefault()
   getAPI()
@@ -40,11 +39,13 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&ap
     const temperature = data.main.temp;
     const wind = data.wind.speed;
     const humidity = data.main.humidity;
+    let city = searchInput.value;
 
     // html update with data
     document.getElementById('temptext').textContent = temperature;
     document.getElementById('windtext').textContent = wind;
     document.getElementById('humiditytext').textContent = humidity;
+    document.getElementById('city').textContent = city;
   })
   .catch(error => {
     console.error('Error:', error);
