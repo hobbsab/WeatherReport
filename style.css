@@ -10,34 +10,27 @@ form {
   text-align: center;
 }
 
-.maindiv{
+.maindiv {
 margin: 70px;
 background-color: #ffffff;
 border-radius: 20px;
-}
-
-.citybox {
-  text-align: center;
 }
 
 div {
   text-align: center;
 }
 
-header {
+h1, h2 {
   font-family: 'Philosopher', sans-serif;
+}
+
+header {
   font-size: 50px;
   display: inline-block;
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 40px;
   margin-top: 30px;
   font-size: 30px;
-}
-
-
-.blank {
-  color: aqua;
-  justify-content:end;
 }
 
 .searchbtn {
@@ -51,10 +44,6 @@ header {
   padding: 10px;
 }
 
-h2 {
-  text-align: center;
-}
-
 .searchbtn:hover {
   background-color: #5acbff;
 }
@@ -63,17 +52,13 @@ h2 {
   background-color: #468ec5;
 }
 
-p {
-  text-align: center;
-}
-
 .citybox {
   background-color: black;
   color: #ffffff;
   height: 50px;
   width: 60px;
   padding: 70px;
-  margin: 20px;
+  margin-bottom: 60px;
   border-radius: 8px;
 }
 
