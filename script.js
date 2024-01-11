@@ -19,20 +19,21 @@
 //       console.error(error);
 //     });
 // });
+const searchInput = document.querySelector('#maininput');
+const apiKey = '37e6228807b1cbe9c035512c6ab1399d';
+let city = searchInput.value;
 
 const searchForm = document.querySelector('#location-form');
-searchForm.addEventListener('searchbtn', function(getAPI) {
-  getAPI.preventDefault();
+searchForm.addEventListener("submit", function (event) {
+  event.preventDefault()
+  getAPI()
 });
 
-const searchInput = document.querySelector('#maininput');
-
-const apiKey = '37e6228807b1cbe9c035512c6ab1399d';
-const city = searchInput.value;
+console.log (searchInput.value);
 
 // Make API request
-function getAPI {
-fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
+function getAPI() {
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}`)
   .then(response => response.json())
   .then(data => {
     // weather data from API
