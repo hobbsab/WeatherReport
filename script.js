@@ -60,7 +60,6 @@ function getWeek() {
     // html
     forecastData.forEach(day => {
       const date = day.dt_txt;
-      const temperature = day.main.temp;
       const weatherIcon = day.weather[0].icon;
 
       const forecastItem = document.createElement('div');
@@ -79,10 +78,10 @@ function getWeek() {
       forecastItem.appendChild(weatherIconElement);
 
       // append in html
-      const forecastContainer = document.getElementById('forecast-container');
+      const forecastContainer = document.getElementById('day1');
       forecastContainer.appendChild(forecastItem);
     });
-  });
+  };
   .catch(error => {
     console.log('Error:', error);
   });
