@@ -11,4 +11,3 @@ storm
 MIT
 
 ## WIP. Screenshot will be placed here later.
-## credits
