@@ -25,6 +25,7 @@ form {
 margin: 70px;
 background-color: #ffffff;
 border-radius: 20px;
+padding: 30px;
 }
 
 div {
@@ -87,7 +88,6 @@ header {
   padding: 10px;
   margin: 10px;
   width: 150px;
-  margin-bottom: 40px;
 }
 
 .weather-info {
