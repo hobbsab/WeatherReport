@@ -12,5 +12,3 @@ MIT
 
 ## WIP. Screenshot will be placed here later.
 ## credits
-CSS reset
-http://meyerweb.com/eric/tools/css/reset/

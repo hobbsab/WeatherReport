@@ -1,4 +1,5 @@
 const apiKey = '37e6228807b1cbe9c035512c6ab1399d';
+// html elements
 const searchInput = document.querySelector('#searchInput');
 const searchBtn = document.querySelector('#searchBtn');
 const searchForm = document.querySelector('#location-form');
@@ -6,11 +7,16 @@ const tempElement = document.getElementById('temperature');
 const windElement = document.getElementById('wind-speed');
 const humidityElement = document.getElementById('humidity');
 const weatherIconElement = document.getElementById('weather-icon');
+const forecastdiv = document.getElementById('forecastdiv');
 
 searchBtn.addEventListener('click', () => {
+    event.preventDefault()
+    forecastdiv.style.display = "flex";
     let city = searchInput.value; // city is search result
+    console.log(city, "city")
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
+    console.log(url, "url")
+// today's weather
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -51,7 +57,7 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey
 
             const date = new Date(day.dt * 1000);
             const icon = day.weather[0].icon;
-            const temp = day.main.temp;
+            const temp = Math.round(day.main.temp - 273.15); // celsius
             const windSpeed = day.wind.speed;
             const humidity = day.main.humidity;
 
@@ -67,10 +73,3 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey
         });
     })
 });
-
-// searchForm.addEventListener("submit", function (event) {
-//   event.preventDefault()
-//   getAPI()
-//   getWeek()
-//   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-// });
