@@ -24,11 +24,14 @@
         <button class="btn btn-primary btn-sm" id=searchBtn type="submit">Search</button>
       </form>
 
+<button class="btn btn-primary btn-sm" id='mode-toggle'>Toggle C/F</button>
+
 <div id="forecastdiv">
       <h1>Today's Weather Forecast</h1>
     <div class="weather-container-today">
         <div class="weather-info">
           <img id="weather-icon" src="" alt="Weather Icon">
+            <p>Date: <span id="date"></span></p>
             <p>Temperature: <span id="temperature"></span></p>
             <p>Wind Speed: <span id="wind-speed"></span></p>
             <p>Humidity: <span id="humidity"></span></p>
@@ -44,6 +47,10 @@
   <script src="script.js"></script>
 
   </div>
-  <footer>(C) Anna Hobbs, 2024</footer>
+  <footer>(C) Anna Hobbs, 2024
+    <a href="https://github.com/hobbsab">
+      <img class="bottomicons" src="./assets/github-mark-white.png" alt="github" style="width:35px;">
+    </a>
+  </footer>
   </body>
 </html>

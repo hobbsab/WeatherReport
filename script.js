@@ -11,30 +11,11 @@ const forecastdiv = document.getElementById('forecastdiv');
 
 searchBtn.addEventListener('click', () => {
     event.preventDefault()
-    forecastdiv.style.display = "flex";
+    forecastdiv.style.display = "block";
     let city = searchInput.value; // city is search result
     console.log(city, "city")
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     console.log(url, "url")
-// today's weather
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const tempElement = data.main.temp;
-            const humidityElement = data.main.humidity;
-            const description = data.weather[0].description;
-
-            weatherInfo.innerHTML = `
-                <h2>Weather in ${city}</h2>
-                <p>Temperature: ${temperature}°C</p>
-                <p>Humidity: ${humidity}%</p>
-                <p>Description: ${description}</p>
-            `;
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-            weatherInfo.innerHTML = '<p>Failed to fetch weather data. Please try again.</p>';
-        });
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
     .then(response => response.json())
     .then(data => {
