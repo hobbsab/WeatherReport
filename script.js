@@ -3,11 +3,13 @@ const apiKey = '37e6228807b1cbe9c035512c6ab1399d';
 const searchInput = document.querySelector('#searchInput');
 const searchBtn = document.querySelector('#searchBtn');
 const searchForm = document.querySelector('#location-form');
+const dateElement = document.getElementById('date');
 const tempElement = document.getElementById('temperature');
 const windElement = document.getElementById('wind-speed');
 const humidityElement = document.getElementById('humidity');
 const weatherIconElement = document.getElementById('weather-icon');
 const forecastdiv = document.getElementById('forecastdiv');
+const date = new Date
 
 searchBtn.addEventListener('click', () => {
     event.preventDefault()
@@ -19,6 +21,7 @@ searchBtn.addEventListener('click', () => {
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
     .then(response => response.json())
     .then(data => {
+        dateElement.textContent = `${date.toDateString()}`;
         tempElement.textContent = `${Math.round(data.main.temp - 273.15)}°C`;
         windElement.textContent = `${data.wind.speed} m/s`;
         humidityElement.textContent = `${data.main.humidity}%`;
@@ -36,7 +39,7 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey
             const weatherCard = document.createElement('div');
             weatherCard.classList.add('weather-card');
 
-            const date = new Date(day.dt * 1000);
+            const dateForecast = new Date(day.dt * 1000);
             const icon = day.weather[0].icon;
             const temp = Math.round(day.main.temp - 273.15); // celsius
             const windSpeed = day.wind.speed;
@@ -44,7 +47,7 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey
 
             weatherCard.innerHTML = `
                 <img src="http://openweathermap.org/img/wn/${icon}.png" alt="Weather Icon" class="weather-icon">
-                <p>Date: ${date.toDateString()}</p>
+                <p>Date: ${dateForecast.toDateString()}</p>
                 <p>Temperature: ${temp}°C</p>
                 <p>Wind Speed: ${windSpeed} m/s</p>
                 <p>Humidity: ${humidity}%</p>
