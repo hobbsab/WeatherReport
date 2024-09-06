@@ -57,3 +57,40 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey
         });
     })
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Select the necessary elements
+    const unitElement = document.getElementById('unit');
+    const toggleBtn = document.getElementById('mode-toggle');
+
+    let isCelsius = true; // Boolean to track current unit
+
+    // Function to convert Celsius to Fahrenheit
+    const celsiusToFahrenheit = (celsius) => (celsius * 9/5) + 32;
+
+    // Function to convert Fahrenheit to Celsius
+    const fahrenheitToCelsius = (fahrenheit) => (fahrenheit - 32) * 5/9;
+
+    // Event listener for toggle button
+    toggleBtn.addEventListener('click', () => {
+        let currentTemperature = parseFloat(tempElement.textContent);
+
+        if (isCelsius) {
+            // Convert to Fahrenheit
+            const fahrenheit = celsiusToFahrenheit(currentTemperature);
+            tempElement.textContent = fahrenheit.toFixed(1); // Round to 1 decimal
+            toggleBtn.textContent = 'Switch to Celsius';
+            // unitElement.textContent = 'C';
+        } else {
+            // Convert to Celsius
+            const celsius = fahrenheitToCelsius(currentTemperature);
+            tempElement.textContent = celsius.toFixed(1); // Round to 1 decimal
+            toggleBtn.textContent = 'Switch to Fahrenheit';
+            // unitElement.textContent = 'F';
+        }
+
+        // Toggle the unit flag
+        isCelsius = !isCelsius;
+    });
+});
