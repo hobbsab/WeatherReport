@@ -5,6 +5,7 @@ const searchBtn = document.querySelector('#searchBtn');
 const searchForm = document.querySelector('#location-form');
 const dateElement = document.getElementById('date');
 const tempElement = document.getElementById('temperature');
+const tempElementF = document.getElementById('temperatureF');
 const windElement = document.getElementById('wind-speed');
 const humidityElement = document.getElementById('humidity');
 const weatherIconElement = document.getElementById('weather-icon');
@@ -18,79 +19,48 @@ searchBtn.addEventListener('click', () => {
     console.log(city, "city")
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     console.log(url, "url")
-fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
     .then(data => {
         dateElement.textContent = `${date.toDateString()}`;
-        tempElement.textContent = `${Math.round(data.main.temp - 273.15)}°C`;
+        tempElement.textContent = `${Math.round(data.main.temp)}°C`;
+        tempElementF.textContent = `${Math.round((data.main.temp * 9/5) + 32)}°F`;
         windElement.textContent = `${data.wind.speed} m/s`;
         humidityElement.textContent = `${data.main.humidity}%`;
         weatherIconElement.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
     })
     .catch(error => console.error('Error fetching data:', error));
-fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
-    .then(response => response.json())
-    .then(data => {
-        const forecastData = data.list.filter(item => item.dt_txt.includes('12:00:00')); // daily forecast data
-
-        const forecastContainer = document.querySelector('.forecast');
-
-        forecastData.forEach(day => {
-            const weatherCard = document.createElement('div');
-            weatherCard.classList.add('weather-card');
-
-            const dateForecast = new Date(day.dt * 1000);
-            const icon = day.weather[0].icon;
-            const temp = Math.round(day.main.temp - 273.15); // celsius
-            const windSpeed = day.wind.speed;
-            const humidity = day.main.humidity;
-
-            weatherCard.innerHTML = `
-                <img src="http://openweathermap.org/img/wn/${icon}.png" alt="Weather Icon" class="weather-icon">
-                <p>Date: ${dateForecast.toDateString()}</p>
-                <p>Temperature: ${temp}°C</p>
-                <p>Wind Speed: ${windSpeed} m/s</p>
-                <p>Humidity: ${humidity}%</p>
-            `;
-
-            forecastContainer.appendChild(weatherCard);
-        });
-    })
-});
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Select the necessary elements
-    const unitElement = document.getElementById('unit');
-    const toggleBtn = document.getElementById('mode-toggle');
+// 5-day forecast
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`)
+        .then(response => response.json())
+        .then(data => {
+            const forecastData = data.list.filter(item => item.dt_txt.includes('12:00:00'));
 
-    let isCelsius = true; // Boolean to track current unit
+            const forecastContainer = document.querySelector('.forecast');
+            forecastContainer.innerHTML = ''; // Clear previous forecast cards
+            forecastData.forEach(day => {
+                const weatherCard = document.createElement('div');
+                weatherCard.classList.add('weather-card');
 
-    // Function to convert Celsius to Fahrenheit
-    const celsiusToFahrenheit = (celsius) => (celsius * 9/5) + 32;
+                const dateForecast = new Date(day.dt * 1000);
+                const icon = day.weather[0].icon;
+                const temp = Math.round(day.main.temp);
+                const tempF = Math.round((day.main.temp * 9/5) + 32);
+                const windSpeed = day.wind.speed;
+                const humidity = day.main.humidity;
 
-    // Function to convert Fahrenheit to Celsius
-    const fahrenheitToCelsius = (fahrenheit) => (fahrenheit - 32) * 5/9;
+                weatherCard.innerHTML = `
+                    <img src="http://openweathermap.org/img/wn/${icon}.png" alt="Weather Icon" class="weather-icon">
+                    <p>${dateForecast.toDateString()}</p>
+                    <p>${temp}°C / ${tempF}°F</p>
+                    <p>Wind Speed: ${windSpeed} m/s</p>
+                    <p>Humidity: ${humidity}%</p>
+                `;
 
-    // Event listener for toggle button
-    toggleBtn.addEventListener('click', () => {
-        let currentTemperature = parseFloat(tempElement.textContent);
-
-        if (isCelsius) {
-            // Convert to Fahrenheit
-            const fahrenheit = celsiusToFahrenheit(currentTemperature);
-            tempElement.textContent = fahrenheit.toFixed(1); // Round to 1 decimal
-            toggleBtn.textContent = 'Switch to Celsius';
-            // unitElement.textContent = 'C';
-        } else {
-            // Convert to Celsius
-            const celsius = fahrenheitToCelsius(currentTemperature);
-            tempElement.textContent = celsius.toFixed(1); // Round to 1 decimal
-            toggleBtn.textContent = 'Switch to Fahrenheit';
-            // unitElement.textContent = 'F';
-        }
-
-        // Toggle the unit flag
-        isCelsius = !isCelsius;
-    });
+                forecastContainer.appendChild(weatherCard);
+            });
+        })
+        .catch(error => console.error('Error fetching forecast:', error));
 });
