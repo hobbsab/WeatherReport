@@ -31,7 +31,7 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}
 fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
     .then(response => response.json())
     .then(data => {
-        const forecastData = data.list.filter(item => item.dt_txt.includes('12:00:00')); // Get daily forecast data
+        const forecastData = data.list.filter(item => item.dt_txt.includes('12:00:00')); // daily forecast data
 
         const forecastContainer = document.querySelector('.forecast');
 
